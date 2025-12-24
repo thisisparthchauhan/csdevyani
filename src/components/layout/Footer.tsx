@@ -49,18 +49,18 @@ export default function Footer() {
                             <p className="flex items-start group">
                                 <MapPin className="mr-3 mt-1.5 flex-shrink-0 text-[var(--brand-secondary)] group-hover:text-white transition-colors" size={20} />
                                 <span className="group-hover:text-slate-300 transition-colors">
-                                    CSDEVYANI - Corporate & Legal Solutions,<br />
-                                    Gift City, Gandhinagar,<br />
-                                    Gujarat - 382355
+                                    15 Vedika Exotika Bunglows,<br />
+                                    PDPU Road, Nr Gift City,<br />
+                                    Gandhinagar, Gujarat - 382355
                                 </span>
                             </p>
                             <p className="flex items-center group">
                                 <Phone className="mr-3 text-[var(--brand-secondary)] group-hover:text-white transition-colors" size={20} />
-                                <span className="group-hover:text-white transition-colors">+91-79-6180-9800</span>
+                                <a href="tel:+919825600907" className="group-hover:text-white transition-colors">+91 98256 00907</a>
                             </p>
                             <p className="flex items-center group">
                                 <Mail className="mr-3 text-[var(--brand-secondary)] group-hover:text-white transition-colors" size={20} />
-                                <span className="group-hover:text-white transition-colors">info@csdevyani.com</span>
+                                <a href="mailto:compliance@csdevyani.com" className="group-hover:text-white transition-colors">compliance@csdevyani.com</a>
                             </p>
                         </div>
                     </div>
@@ -159,13 +159,20 @@ export default function Footer() {
 
                         <div className="flex space-x-4">
                             {[
-                                { Icon: Twitter, href: '#' },
-                                { Icon: Linkedin, href: '#' },
-                                { Icon: Facebook, href: '#' },
-                                { Icon: Instagram, href: 'https://www.instagram.com/estabizzfintech?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
-                                { Icon: Youtube, href: '#' }
+                                { Icon: Linkedin, href: 'https://www.linkedin.com/company/csdevyani', label: 'LinkedIn' },
+                                { Icon: Twitter, href: 'https://twitter.com/csdevyani', label: 'Twitter' },
+                                { Icon: Facebook, href: 'https://www.facebook.com/csdevyani', label: 'Facebook' },
+                                { Icon: Instagram, href: 'https://www.instagram.com/estabizzfintech?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', label: 'Instagram' },
+                                { Icon: Youtube, href: 'https://www.youtube.com/@csdevyani', label: 'YouTube' }
                             ].map((social, idx) => (
-                                <Link key={idx} href={social.href} target="_blank" className="bg-slate-900 p-3 rounded-full hover:bg-[var(--brand-secondary)] hover:text-white text-slate-500 transition-all hover:-translate-y-1 shadow-md hover:shadow-lg border border-slate-800 hover:border-transparent">
+                                <Link
+                                    key={idx}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={social.label}
+                                    className="bg-slate-900 p-3 rounded-full hover:bg-[var(--brand-secondary)] hover:text-white text-slate-500 transition-all hover:-translate-y-1 shadow-md hover:shadow-lg border border-slate-800 hover:border-transparent"
+                                >
                                     <social.Icon size={20} />
                                 </Link>
                             ))}

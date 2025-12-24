@@ -34,8 +34,8 @@ export default function ContactPage() {
                         </div>
                         <div>
                             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Call Us</p>
-                            <a href="tel:+917961809800" className="text-slate-800 font-bold hover:text-blue-600 transition-colors">
-                                +91-79-6180-9800
+                            <a href="tel:+919825600907" className="text-slate-800 font-bold hover:text-blue-600 transition-colors">
+                                +91 98256 00907
                             </a>
                         </div>
                     </div>
@@ -46,8 +46,8 @@ export default function ContactPage() {
                         </div>
                         <div>
                             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email Us</p>
-                            <a href="mailto:info@csdevyani.com" className="text-slate-800 font-bold hover:text-amber-600 transition-colors">
-                                info@csdevyani.com
+                            <a href="mailto:compliance@csdevyani.com" className="text-slate-800 font-bold hover:text-amber-600 transition-colors">
+                                compliance@csdevyani.com
                             </a>
                         </div>
                     </div>
@@ -58,8 +58,9 @@ export default function ContactPage() {
                         </div>
                         <div>
                             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Visit Us</p>
-                            <span className="text-slate-800 font-bold">
-                                GIFT City, Gandhinagar
+                            <span className="text-slate-800 font-bold text-sm leading-relaxed">
+                                15 Vedika Exotika Bunglows,<br />
+                                PDPU Road, Nr Gift City, Gandhinagar
                             </span>
                         </div>
                     </div>
