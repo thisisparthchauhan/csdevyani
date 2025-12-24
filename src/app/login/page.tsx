@@ -90,11 +90,16 @@ export default function LoginPage() {
                 try {
                     await setDoc(doc(db, 'users', user.uid), {
                         fullName: fullName.trim(),
-                        email: email.toLowerCase(), // Ensure consistency
-                        mobile: "+" + mobile, // Save format with + for consistency
-                        role: 'member', // Default role
+                        email: email.toLowerCase(),
+                        mobile: "+" + mobile,
+                        role: 'member',
+                        emailVerified: false,
+                        profileCompleted: 40,
+                        accountStatus: 'active',
+                        loginCount: 1,
                         createdAt: serverTimestamp(),
-                        updatedAt: serverTimestamp()
+                        updatedAt: serverTimestamp(),
+                        lastLoginAt: serverTimestamp()
                     });
                 } catch (dbError) {
                     console.error("Error saving user details:", dbError);
@@ -244,6 +249,18 @@ export default function LoginPage() {
                     >
                         {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Create Account')}
                     </button>
+
+                    {/* Forgot Password Link (Login Mode Only) */}
+                    {isLogin && (
+                        <div className="mt-4 text-center">
+                            <Link
+                                href="/forgot-password"
+                                className="text-sm font-medium text-slate-600 hover:text-[var(--brand-secondary)] transition-colors inline-flex items-center"
+                            >
+                                Forgot your password?
+                            </Link>
+                        </div>
+                    )}
                 </form>
 
                 <div className="mt-8 text-center">
