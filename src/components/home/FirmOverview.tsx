@@ -70,7 +70,7 @@ export default function FirmOverview() {
                             Our Experience Advantage
                         </h3>
                         <p className="text-slate-300 mb-6 italic">
-                            CS Devyani Khambhati brings extensive on-ground regulatory exposure.
+                            CS Devyani Khambhati brings extensive on-ground regulatory exposure, including experience with:
                         </p>
                         <ul className="space-y-4">
                             {[
@@ -119,6 +119,12 @@ export default function FirmOverview() {
                                 <p className="text-xs text-slate-500 px-2">{step.desc}</p>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="text-center mt-12 pt-8 border-t border-slate-100">
+                        <p className="text-slate-500 italic max-w-2xl mx-auto">
+                            "Clients rely on us for clarity under pressure, especially during inspections, filings, restructuring, and regulatory correspondence."
+                        </p>
                     </div>
                 </div>
 

@@ -6,40 +6,46 @@ import { motion } from 'framer-motion';
 export default function BusinessActivities() {
     const activities = [
         {
-            title: 'Banking & IBUs',
+            title: 'Banking & International Banking Units (IBUs)',
             icon: Landmark,
             desc: 'We advise digital-first International Banking Units (IBUs) and regulated banking entities operating within IFSC and cross-border frameworks.',
-            aiReady: true
+            aiReady: true,
+            href: '/coming-soon'
         },
         {
-            title: 'Fund Management',
+            title: 'Fund Management & Alternative Investment Structures',
             icon: Wallet,
             desc: 'Our fund management advisory supports asset managers and investment platforms across fund structuring, governance, and ongoing compliance.',
-            aiReady: true
+            aiReady: true,
+            href: '/alternative-investment-fund-registration-india'
         },
         {
-            title: 'Aircraft Leasing',
+            title: 'Aircraft Leasing & Aviation Finance',
             icon: Plane,
             desc: 'We offer end-to-end advisory for aircraft leasing entities, particularly those operating through IFSC structures.',
-            aiReady: false
+            aiReady: false,
+            href: '/coming-soon'
         },
         {
-            title: 'Capital Markets',
+            title: 'Capital Markets & Market Intermediaries',
             icon: BarChart3,
-            desc: 'We advise capital market participants on building structured, technology-enabled compliance systems that support regulatory obligations.',
-            aiReady: true
+            desc: 'We advise capital market participants on building structured, technology-enabled compliance systems.',
+            aiReady: true,
+            href: '/investment-adviser-registration-india'
         },
         {
-            title: 'FinTech Innovation',
+            title: 'FinTech & Regulatory Innovation',
             icon: Cpu,
             desc: 'We support fintech ventures and financial technology platforms in navigating evolving regulatory environments.',
-            aiReady: true
+            aiReady: true,
+            href: '/coming-soon'
         },
         {
             title: 'Portfolio Management Services (PMS)',
             icon: BarChart3,
-            desc: 'We provide dedicated advisory for Portfolio Management Services, focusing on governance, disclosures, and ongoing regulatory compliance.',
-            aiReady: true
+            desc: 'We provide dedicated advisory for Portfolio Management Services.',
+            aiReady: true,
+            href: '/investment-adviser-registration-india'
         },
     ];
 
@@ -97,7 +103,7 @@ export default function BusinessActivities() {
                             </p>
 
                             <Link
-                                href="/coming-soon"
+                                href={item.href || '/coming-soon'}
                                 className="inline-flex items-center text-sm font-bold text-slate-900 group-hover:text-[var(--brand-secondary)] transition-colors"
                             >
                                 Learn More

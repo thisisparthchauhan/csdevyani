@@ -22,13 +22,6 @@ export default function TopBar() {
                     <Link href="/coming-soon" className="hover:text-white transition-colors hidden sm:block">Support</Link>
                     <span className="text-slate-700 hidden sm:block">|</span>
                     <Link href="/coming-soon" className="hover:text-white transition-colors hidden sm:block">Careers</Link>
-
-                    <Link
-                        href="/login"
-                        className="flex items-center bg-slate-800 hover:bg-[var(--brand-secondary)] hover:text-white text-slate-200 px-3 py-1 rounded-full transition-all ml-4"
-                    >
-                        <LogIn size={12} className="mr-1" /> Login
-                    </Link>
                 </div>
             </div>
         </div>

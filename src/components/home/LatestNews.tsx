@@ -65,7 +65,7 @@ export default function LatestArticles() {
                     {articles[activeTab as keyof typeof articles].map((item) => (
                         <Link
                             key={item.id}
-                            href="/coming-soon"
+                            href="/articles"
                             className="group bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-xl hover:border-[var(--brand-secondary)]/30 transition-all duration-300 cursor-pointer flex flex-col md:flex-row justify-between items-center"
                         >
                             <div className="flex-1">
@@ -91,7 +91,7 @@ export default function LatestArticles() {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <Link href="/coming-soon" className="text-slate-500 font-bold hover:text-[var(--brand-secondary)] transition-colors flex items-center justify-center mx-auto group w-fit">
+                    <Link href="/articles" className="text-slate-500 font-bold hover:text-[var(--brand-secondary)] transition-colors flex items-center justify-center mx-auto group w-fit">
                         View Archive
                         <ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
                     </Link>

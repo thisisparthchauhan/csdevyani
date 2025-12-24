@@ -7,6 +7,9 @@ import StatisticsSection from "@/components/home/StatisticsSection";
 import LatestNews from "@/components/home/LatestNews";
 import ContactSection from "@/components/home/ContactSection";
 
+import PayWhileYouEarn from "@/components/home/PayWhileYouEarn";
+import ProcessInfographic from "@/components/home/ProcessInfographic";
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -15,6 +18,8 @@ export default function Home() {
       <AboutSection />
       <FirmOverview />
       <BusinessActivities />
+      <PayWhileYouEarn />
+      <ProcessInfographic />
       <StatisticsSection />
       <LatestNews />
       <ContactSection />

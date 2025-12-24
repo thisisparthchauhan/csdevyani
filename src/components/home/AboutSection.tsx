@@ -45,6 +45,12 @@ export default function AboutSection() {
                             <p>
                                 Based out of GIFT City, Gandhinagar, we advise corporates, regulated entities, promoters, and boards on navigating complex legal and compliance frameworks with clarity, discipline, and confidence.
                             </p>
+                            <p>
+                                At Devyani & Co., we specialise in advising businesses operating in high-growth, high-regulation sectors, where governance standards, regulatory discipline, and structured compliance are critical. Our expertise lies in integrating traditional corporate governance with modern, technology-enabled compliance frameworks, enabling organisations to remain agile while meeting regulatory expectations with confidence.
+                            </p>
+                            <p className="font-semibold text-slate-800 border-l-4 border-[var(--brand-secondary)] pl-4 italic">
+                                Our practice is built on one clear belief: Strong governance and informed compliance are the foundations of sustainable business.
+                            </p>
                         </div>
 
                         <div className="pt-6 border-t border-slate-200">
@@ -52,6 +58,7 @@ export default function AboutSection() {
                             <p className="text-slate-600 mb-4">
                                 At Devyani & Co., we do not treat compliance as a routine or mechanical exercise. We approach it as a governance responsibility — one that directly impacts reputation, regulatory trust, and long-term continuity.
                             </p>
+                            <div className="mb-4 font-semibold text-slate-700">Our work is defined by:</div>
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {[
                                     "Clear interpretation of law, not guesswork",

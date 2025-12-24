@@ -47,9 +47,9 @@ export default function HeroSection() {
                 }
             })();
 
-            // Timeout promise to force fallback after 1.5 seconds if DB is slow
+            // Timeout promise to force fallback after 0.8 seconds if DB is slow
             const timeoutPromise = new Promise<UpdateItem[]>((resolve) =>
-                setTimeout(() => resolve([]), 1500)
+                setTimeout(() => resolve([]), 800)
             );
 
             try {

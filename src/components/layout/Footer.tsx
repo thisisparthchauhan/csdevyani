@@ -72,29 +72,41 @@ export default function Footer() {
                             Quick Links
                         </h3>
                         <ul className="space-y-5 text-base">
-                            {['About Us', 'Latest News', 'Tenders', 'Careers', 'Contact Directory'].map((item) => (
-                                <li key={item}>
-                                    <Link href="/coming-soon" className="hover:text-[var(--brand-secondary)] hover:translate-x-2 transition-all flex items-center group">
+                            {[
+                                { name: 'Home', href: '/' },
+                                { name: 'Contact Us', href: '/contact' },
+                                { name: 'Articles', href: '/articles' },
+                                { name: 'Dashboard', href: '/dashboard' },
+                                { name: 'Careers', href: '/coming-soon' }
+                            ].map((item) => (
+                                <li key={item.name}>
+                                    <Link href={item.href} className="hover:text-[var(--brand-secondary)] hover:translate-x-2 transition-all flex items-center group">
                                         <ArrowRight size={16} className="mr-3 opacity-50 group-hover:opacity-100 transition-opacity" />
-                                        {item}
+                                        {item.name}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Important Links */}
+                    {/* Important Services */}
                     <div>
                         <h3 className="text-white text-lg font-bold mb-8 flex items-center tracking-wider">
                             <span className="w-8 h-1 bg-[var(--brand-secondary)] mr-4 rounded-full"></span>
-                            Governance
+                            Our Services
                         </h3>
                         <ul className="space-y-5 text-base">
-                            {['RTI', 'Public Grievances', 'Vigilance', 'Terms & Conditions', 'Privacy Policy'].map((item) => (
-                                <li key={item}>
-                                    <Link href="/coming-soon" className="hover:text-[var(--brand-secondary)] hover:translate-x-2 transition-all flex items-center group">
+                            {[
+                                { name: 'Inv. Adviser Registration', href: '/investment-adviser-registration-india' },
+                                { name: 'IA Compliance', href: '/post-registration-compliance-for-investment-advisers-in-india' },
+                                { name: 'AIF Registration', href: '/alternative-investment-fund-registration-india' },
+                                { name: 'AIF Compliance', href: '/aif-compliance-obligations' },
+                                { name: 'Startup Solutions', href: '/coming-soon' }
+                            ].map((item) => (
+                                <li key={item.name}>
+                                    <Link href={item.href} className="hover:text-[var(--brand-secondary)] hover:translate-x-2 transition-all flex items-center group">
                                         <ArrowRight size={16} className="mr-3 opacity-50 group-hover:opacity-100 transition-opacity" />
-                                        {item}
+                                        {item.name}
                                     </Link>
                                 </li>
                             ))}
@@ -165,7 +177,7 @@ export default function Footer() {
                 <div className="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 font-medium tracking-wide">
                     <p>© 2025 CSDEVYANI. All Rights Reserved.</p>
                     <div className="flex items-center mt-6 md:mt-0 space-x-8">
-                        <span>Last Updated: <span className="text-slate-400">Dec 19, 2024</span></span>
+                        <span>Last Updated: <span className="text-slate-400">Dec 24, 2024</span></span>
                         <span className="flex items-center bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
                             <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                             <span className="text-xs uppercase tracking-wider text-slate-600 mr-2">Live Visitors:</span>
