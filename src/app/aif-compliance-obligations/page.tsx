@@ -14,6 +14,8 @@ import {
     Scale
 } from 'lucide-react';
 import Link from 'next/link';
+import AIFComplianceFAQs from '@/components/regulatory/AIFComplianceFAQs';
+import AIFComplianceCalendar from '@/components/regulatory/AIFComplianceCalendar';
 
 export const metadata: Metadata = {
     title: 'AIF Post-Registration Compliance & Ongoing Obligations – SEBI Regulations',
@@ -254,6 +256,12 @@ export default function AIFCompliance() {
                     </div>
                 </div>
             </section>
+
+            {/* COMPREHENSIVE COMPLIANCE CALENDAR */}
+            <AIFComplianceCalendar />
+
+            {/* COMPREHENSIVE FAQs */}
+            <AIFComplianceFAQs />
 
             {/* CTA */}
             <section className="py-12 bg-white border-t border-slate-200">
