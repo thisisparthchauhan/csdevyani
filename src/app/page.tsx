@@ -6,6 +6,7 @@ import BusinessActivities from "@/components/home/BusinessActivities";
 import StatisticsSection from "@/components/home/StatisticsSection";
 import LatestNews from "@/components/home/LatestNews";
 import ContactSection from "@/components/home/ContactSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 
 import PayWhileYouEarn from "@/components/home/PayWhileYouEarn";
 import ProcessInfographic from "@/components/home/ProcessInfographic";
@@ -21,6 +22,7 @@ export default function Home() {
       <PayWhileYouEarn />
       <ProcessInfographic />
       <StatisticsSection />
+      <TestimonialsSection />
       <LatestNews />
       <ContactSection />
     </div>

@@ -31,6 +31,10 @@ export default function Navbar() {
 
     const navItems = [
         {
+            name: 'About Us',
+            href: '/about'
+        },
+        {
             name: 'Regulatory',
             hasDropdown: true,
             subItems: [

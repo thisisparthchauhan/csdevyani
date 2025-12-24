@@ -40,6 +40,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AIChatWidget from "@/components/layout/AIChatWidget";
 import AuthPopup from "@/components/layout/AuthPopup";
+import WhatsAppWidget from "@/components/chat/WhatsAppWidget";
 
 export default function RootLayout({
   children,
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Footer />
         <AIChatWidget />
         <AuthPopup />
+        <WhatsAppWidget />
       </body>
     </html>
   );
