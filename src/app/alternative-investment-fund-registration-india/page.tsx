@@ -13,6 +13,8 @@ import {
     PenTool
 } from 'lucide-react';
 import Link from 'next/link';
+import AIFComprehensiveFAQs from '@/components/regulatory/AIFComprehensiveFAQs';
+import AIFDocumentationGuide from '@/components/regulatory/AIFDocumentationGuide';
 
 export const metadata: Metadata = {
     title: 'Alternative Investment Fund Registration in India – A Structured Guide by Devyani & Co.',
@@ -375,6 +377,12 @@ export default function AIFRegistration() {
                     </div>
                 </div>
             </section>
+
+            {/* COMPREHENSIVE DOCUMENTATION GUIDE */}
+            <AIFDocumentationGuide />
+
+            {/* COMPREHENSIVE FAQs */}
+            <AIFComprehensiveFAQs />
 
             {/* CTA */}
             <section className="py-12 bg-white border-t border-slate-200">
