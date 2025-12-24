@@ -203,12 +203,12 @@ export default function DashboardPage() {
                 const credential = EmailAuthProvider.credential(user.email, passState.currentPassword);
                 await reauthenticateWithCredential(user, credential);
 
-                // Update
+                // Update password (Firebase Auth handles this securely)
                 await updatePassword(user, passState.newPassword);
 
-                // Store new password in Firestore as requested
+                // Log activity (without storing password)
                 await setDoc(doc(db, 'users', user.uid), {
-                    password: passState.newPassword,
+                    lastPasswordChange: new Date(),
                     updatedAt: new Date()
                 }, { merge: true });
 

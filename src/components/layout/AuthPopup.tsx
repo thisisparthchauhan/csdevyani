@@ -109,15 +109,19 @@ export default function AuthPopup() {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // 3. Save Details
+                // 3. Save User Profile (without password)
                 await setDoc(doc(db, 'users', user.uid), {
                     fullName: fullName.trim(),
                     email: email.toLowerCase(),
                     mobile: "+" + mobile,
-                    password: password, // Storing password as requested
                     role: 'member',
+                    emailVerified: false,
+                    profileCompleted: 40, // Basic info provided
+                    accountStatus: 'active',
+                    loginCount: 1,
                     createdAt: serverTimestamp(),
-                    updatedAt: serverTimestamp()
+                    updatedAt: serverTimestamp(),
+                    lastLoginAt: serverTimestamp()
                 });
             }
 
