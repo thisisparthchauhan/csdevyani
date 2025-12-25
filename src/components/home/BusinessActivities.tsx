@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, Wallet, Landmark, Building2, Plane, Cpu, BarChart3, Globe } from 'lucide-react';
+import { ArrowRight, Wallet, Landmark, Building2, Plane, Cpu, BarChart3, Globe, Shield, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -18,6 +18,20 @@ export default function BusinessActivities() {
             desc: 'Our fund management advisory supports asset managers and investment platforms across fund structuring, governance, and ongoing compliance.',
             aiReady: true,
             href: '/alternative-investment-fund-registration-india'
+        },
+        {
+            title: 'Insurance Advisory & IRDAI Compliance',
+            icon: Shield,
+            desc: 'Comprehensive advisory for Insurance Broker, Corporate Agent, and Insurance Repository registrations under IRDAI regulations.',
+            aiReady: true,
+            href: '/insurance-advisory-services-india'
+        },
+        {
+            title: 'SEBI Research Analyst Registration',
+            icon: TrendingUp,
+            desc: 'Expert guidance for Research Analyst registration, compliance frameworks, and building credible, ethical market research practices.',
+            aiReady: true,
+            href: '/sebi-research-analyst-registration'
         },
         {
             title: 'Aircraft Leasing & Aviation Finance',
