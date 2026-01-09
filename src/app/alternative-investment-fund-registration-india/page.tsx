@@ -13,8 +13,7 @@ import {
     PenTool
 } from 'lucide-react';
 import Link from 'next/link';
-import AIFComprehensiveFAQs from '@/components/regulatory/AIFComprehensiveFAQs';
-import AIFDocumentationGuide from '@/components/regulatory/AIFDocumentationGuide';
+
 
 export const metadata: Metadata = {
     title: 'Alternative Investment Fund Registration in India – A Structured Guide by Devyani & Co.',
@@ -347,42 +346,196 @@ export default function AIFRegistration() {
                 </div>
             </section>
 
-            {/* FAQs */}
+            {/* ADVANCED FAQS */}
             <section className="py-20 bg-slate-50">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
-                        <p className="text-slate-600 mt-2">Expert answers to common queries on AIF Registration.</p>
+                        <h2 className="text-3xl font-bold text-slate-900">Advanced FAQs – Alternative Investment Fund (AIF) Registration in India</h2>
+                        <p className="text-slate-600 mt-2">Comprehensive answers to critical regulatory, structuring, and operational queries.</p>
                     </div>
 
-                    <div className="space-y-4">
-                        {[
-                            { q: "What is the minimum corpus for an AIF?", a: "The minimum corpus for each scheme of an AIF is ₹20 Crore (₹10 Crore for Angel Funds)." },
-                            { q: "Can an AIF accept funds from foreign investors?", a: "Yes, AIFs can accept funds from foreign investors, subject to FEMA guidelines and RBI reporting." },
-                            { q: "How long does AIF registration take?", a: "The process typically takes 3-6 months, depending on the clarity of the application, PPM quality, and response time to SEBI queries." },
-                            { q: "Is a physical office mandatory?", a: "While SEBI regulations focus on infrastructure, a registered office in India is required for the entity (Trust/LLP/Company)." },
-                            { q: "What is the role of a Sponsor?", a: "The Sponsor sets up the AIF and is required to maintain a continuing interest (skin-in-the-game) in the fund to align interests with investors." },
-                            { q: "Can AIFs raise funds from the public?", a: "No, AIFs can only raise funds through private placement to sophisticated investors. Public solicitation is strictly prohibited." }
-                        ].map((faq, idx) => (
-                            <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                                <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors">
-                                    {faq.q}
-                                    <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform" />
-                                </summary>
-                                <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
-                                    {faq.a}
-                                </div>
-                            </details>
-                        ))}
+                    <div className="space-y-8">
+                        {/* A. Foundational & Structuring Questions */}
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">A. Foundational & Structuring Questions</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "1. Can an AIF be registered before identifying investors?", a: "Yes. AIF registration is obtained before fund raising. Investors are onboarded only after registration and issuance of the final PPM." },
+                                    { q: "2. Is it mandatory to raise the full corpus immediately after registration?", a: "No. The minimum corpus requirement applies to the fund overall, not to immediate fund raising." },
+                                    { q: "3. Can an AIF be registered with a small initial team?", a: "Yes, provided the Manager demonstrates adequate experience, infrastructure, and operational capability." },
+                                    { q: "4. Is a trust structure compulsory for AIF registration?", a: "No. AIFs may be structured as a trust, LLP, or company, though trusts are most commonly preferred." },
+                                    { q: "5. Can the same entity act as Sponsor and Manager?", a: "Yes, subject to proper disclosure and compliance with continuing interest requirements." },
+                                    { q: "6. Is prior fund management experience mandatory for AIF registration?", a: "Direct experience is not mandatory, but SEBI evaluates collective experience, governance strength, and professional capability." },
+                                    { q: "7. Can first-time fund managers obtain AIF registration?", a: "Yes, if supported by a robust governance framework, experienced professionals, and clear investment strategy." },
+                                    { q: "8. Can an NBFC sponsor or manage an AIF?", a: "Yes, subject to compliance with applicable RBI and SEBI norms and proper segregation of activities." },
+                                    { q: "9. Can a family office register an AIF?", a: "Yes, many family offices use the AIF structure for pooled investment, subject to eligibility and compliance." },
+                                    { q: "10. Is it possible to register multiple AIFs under the same Sponsor?", a: "Yes, provided each AIF meets independent eligibility, governance, and compliance requirements." }
+                                ].map((faq, idx) => (
+                                    <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors text-left">
+                                            <span className="pr-4">{faq.q}</span>
+                                            <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                        </summary>
+                                        <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* B. Category-Specific & Strategy Questions */}
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">B. Category-Specific & Strategy Questions</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "11. Can the same investment strategy fit into more than one AIF category?", a: "Some strategies may overlap, but the chosen category must align clearly with regulatory definitions." },
+                                    { q: "12. Is leverage completely prohibited for Category II AIFs?", a: "Leverage is prohibited except for temporary funding for operational requirements, subject to limits." },
+                                    { q: "13. Why does Category III AIF face higher regulatory scrutiny?", a: "Because it permits leverage and complex strategies, increasing systemic and investor risk." },
+                                    { q: "14. Can a debt fund be registered under Category I?", a: "No. Debt strategies typically fall under Category II." },
+                                    { q: "15. Can a venture capital strategy be registered as Category II?", a: "No. Venture capital strategies fall under Category I by definition." },
+                                    { q: "16. Can an AIF change its category after registration?", a: "Generally no. A category change may require fresh registration." },
+                                    { q: "17. Can one AIF launch schemes with different strategies?", a: "Yes, subject to scheme-level disclosures and compliance with the approved category." },
+                                    { q: "18. Is it permissible to invest outside India through an AIF?", a: "Yes, subject to foreign exchange laws and disclosures in the PPM." },
+                                    { q: "19. Can an AIF invest in unlisted companies only?", a: "No. Investment scope depends on the strategy disclosed in the PPM." },
+                                    { q: "20. Can a Category III AIF invest in listed securities actively?", a: "Yes, subject to strategy, disclosures, and risk management framework." }
+                                ].map((faq, idx) => (
+                                    <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors text-left">
+                                            <span className="pr-4">{faq.q}</span>
+                                            <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                        </summary>
+                                        <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* C. PPM (Private Placement Memorandum) – Complex Issues */}
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">C. PPM (Private Placement Memorandum) – Complex Issues</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "21. Is the PPM legally binding on the AIF?", a: "Yes. The AIF must operate strictly in accordance with the disclosures made in the PPM." },
+                                    { q: "22. Can generic or template PPMs be used for AIF registration?", a: "No. Generic PPMs often lead to regulatory queries and rejection." },
+                                    { q: "23. Is investor consent required for every PPM amendment?", a: "Only for material changes affecting investment strategy, fees, or rights." },
+                                    { q: "24. Can marketing presentations override the PPM?", a: "No. Any communication inconsistent with the PPM is a compliance violation." },
+                                    { q: "25. Is a separate PPM required for each scheme?", a: "Yes, scheme-specific disclosures are mandatory." },
+                                    { q: "26. Who bears liability for incorrect disclosures in the PPM?", a: "The Sponsor and Manager are jointly responsible." },
+                                    { q: "27. Can fees be changed after registration?", a: "Only with proper disclosure, investor consent, and regulatory compliance." },
+                                    { q: "28. Can risk disclosures be brief if investors are sophisticated?", a: "No. Full and fair disclosure is mandatory regardless of investor sophistication." },
+                                    { q: "29. Is SEBI approval required for every PPM update?", a: "Material changes require intimation or approval, depending on impact." },
+                                    { q: "30. Can PPMs be shared publicly?", a: "No. PPMs are private placement documents and cannot be publicly circulated." }
+                                ].map((faq, idx) => (
+                                    <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors text-left">
+                                            <span className="pr-4">{faq.q}</span>
+                                            <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                        </summary>
+                                        <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* D. Investor & Fund Raising Questions */}
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">D. Investor & Fund Raising Questions</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "31. Can an AIF raise funds before completing KYC?", a: "No. Investor onboarding must be completed before accepting commitments." },
+                                    { q: "32. Can an investor invest less than ₹1 crore through structuring?", a: "No. Minimum investment norms cannot be circumvented." },
+                                    { q: "33. Can employees of the AIF invest at a lower threshold?", a: "Yes, subject to prescribed limits and disclosures." },
+                                    { q: "34. Is there a cap on the number of investors in an AIF scheme?", a: "Yes. Each scheme is subject to a maximum investor limit." },
+                                    { q: "35. Can foreign investors participate in an AIF?", a: "Yes, subject to foreign exchange and regulatory compliance." },
+                                    { q: "36. Can AIF units be transferred between investors?", a: "Yes, subject to PPM terms and regulatory conditions." },
+                                    { q: "37. Can AIFs accept capital in tranches?", a: "Yes, capital commitments may be drawn down as per fund terms." },
+                                    { q: "38. Is escrow mandatory for fund collection?", a: "Operational safeguards are expected, and escrow mechanisms are commonly used." },
+                                    { q: "39. Can an AIF advertise to attract investors?", a: "No. Public solicitation and advertising are prohibited." },
+                                    { q: "40. Can placement agents be appointed for fund raising?", a: "Yes, subject to disclosure and regulatory compliance." }
+                                ].map((faq, idx) => (
+                                    <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors text-left">
+                                            <span className="pr-4">{faq.q}</span>
+                                            <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                        </summary>
+                                        <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* E. Registration Process & Regulatory Scrutiny */}
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">E. Registration Process & Regulatory Scrutiny</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "41. Can SEBI ask for changes in fund strategy during registration?", a: "Yes. SEBI may seek clarification or alignment with regulatory intent." },
+                                    { q: "42. Is registration guaranteed if eligibility criteria are met?", a: "No. SEBI retains discretionary powers to assess overall suitability." },
+                                    { q: "43. Can SEBI reject an AIF application without detailed reasons?", a: "SEBI generally provides reasons or seeks clarification before rejection." },
+                                    { q: "44. Can an applicant withdraw an AIF application?", a: "Yes, subject to procedural formalities. Fees are non-refundable." },
+                                    { q: "45. How long does AIF registration typically take?", a: "Timelines vary based on documentation quality and regulatory queries." },
+                                    { q: "46. Can multiple applications be filed simultaneously?", a: "Yes, but each application is assessed independently." },
+                                    { q: "47. Is in-person interaction with SEBI mandatory?", a: "Not always, but SEBI may call for meetings or clarifications." },
+                                    { q: "48. Can professional advisors represent the applicant before SEBI?", a: "Yes, authorised professionals may represent the applicant." },
+                                    { q: "49. Can an AIF start operations immediately after registration?", a: "Yes, subject to completion of operational and compliance readiness." },
+                                    { q: "50. Is registration transferable to another entity?", a: "No. AIF registration is entity-specific and non-transferable." }
+                                ].map((faq, idx) => (
+                                    <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors text-left">
+                                            <span className="pr-4">{faq.q}</span>
+                                            <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                        </summary>
+                                        <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* F. Practical & Risk-Oriented Questions */}
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4 border-b pb-2">F. Practical & Risk-Oriented Questions</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { q: "51. What is the biggest reason for AIF application delays?", a: "Weak PPM drafting and inconsistent disclosures." },
+                                    { q: "52. What common mistake first-time fund managers make?", a: "Underestimating governance and compliance expectations." },
+                                    { q: "53. Can poor compliance post-registration impact fund raising?", a: "Yes. Investor confidence and regulatory standing are directly affected." },
+                                    { q: "54. Can an AIF be penalised for actions of the Manager?", a: "Yes. The AIF is responsible for actions taken on its behalf." },
+                                    { q: "55. Can an AIF operate without raising funds for a long period?", a: "Yes, but reporting and compliance obligations continue." },
+                                    { q: "56. Is regulatory inspection common for AIFs?", a: "Inspections may be conducted based on risk, complaints, or routine supervision." },
+                                    { q: "57. Can an AIF surrender registration voluntarily?", a: "Yes, subject to settlement of obligations and regulatory approval." },
+                                    { q: "58. Can AIF registration be cancelled by the regulator?", a: "Yes, in cases of serious or repeated non-compliance." },
+                                    { q: "59. Does AIF registration enhance credibility with institutional investors?", a: "Yes. Registration provides regulatory credibility and governance assurance." },
+                                    { q: "60. Is professional advisory essential for AIF registration?", a: "While not mandatory, professional structuring significantly improves approval certainty and long-term compliance." },
+                                    { q: "61. Is AIF registration suitable for small ticket funds?", a: "AIFs are designed for sophisticated investors and may not suit small retail-focused models." },
+                                    { q: "62. Can an AIF later convert into a mutual fund?", a: "No. Mutual funds require separate regulatory approval and structure." },
+                                    { q: "63. Is AIF registration suitable for fintech investment platforms?", a: "Yes, if the platform operates within the private placement and advisory framework." },
+                                    { q: "64. Can an AIF co-invest with other funds?", a: "Yes, subject to disclosure and conflict management norms." },
+                                    { q: "65. What is the most critical success factor for AIF registration?", a: "Clear strategy, strong governance, accurate disclosures, and disciplined compliance." }
+                                ].map((faq, idx) => (
+                                    <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                        <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-amber-600 transition-colors text-left">
+                                            <span className="pr-4">{faq.q}</span>
+                                            <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                        </summary>
+                                        <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
+                                            {faq.a}
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
-
-            {/* COMPREHENSIVE DOCUMENTATION GUIDE */}
-            <AIFDocumentationGuide />
-
-            {/* COMPREHENSIVE FAQs */}
-            <AIFComprehensiveFAQs />
 
             {/* CTA */}
             <section className="py-12 bg-white border-t border-slate-200">
