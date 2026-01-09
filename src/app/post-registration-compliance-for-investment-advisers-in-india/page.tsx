@@ -161,26 +161,36 @@ export default function PostRegistrationCompliance() {
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
-                        <p className="text-slate-600 mt-2">Common queries about ongoing SEBI compliance.</p>
+                        <p className="text-slate-600 mt-2">FAQs – Post-Registration Compliance for Investment Advisers in India</p>
                     </div>
 
                     <div className="space-y-4">
                         {[
-                            { q: "What compliances are required after SEBI Investment Adviser registration?", a: "After registration, Investment Advisers must comply with client onboarding norms, risk profiling, record maintenance, periodic reporting, annual compliance audits, and investor grievance redressal requirements." },
-                            { q: "Is annual compliance audit mandatory for Investment Advisers?", a: "Yes, every registered Investment Adviser must conduct an annual compliance audit through a practising professional." },
-                            { q: "How long must client records be maintained?", a: "Client KYC documents, risk profiling records, advisory rationale, agreements, and communication records must be preserved for at least five years." },
-                            { q: "Is risk profiling compulsory for every client?", a: "Yes, risk profiling is mandatory before providing any personalised investment advice. Advice must be suitable to the client's risk profile." },
-                            { q: "Can an Investment Adviser earn commission from product distribution?", a: "No, Investment Advisers are strictly prohibited from earning commissions or referral fees from the distribution of financial products. They must maintain a strict arms-length relationship." },
-                            { q: "Are Investment Advisers required to maintain a website?", a: "Yes, maintaining a functional website with mandatory disclosures, registration details, and grievance redressal information is compulsory." },
-                            { q: "Who is responsible for compliance in a non-individual Investment Adviser?", a: "The Principal Officer is ultimately responsible, supported by a designated Compliance Officer or an independent professional." },
-                            { q: "Are Investment Advisers subject to SEBI inspections?", a: "Yes, SEBI or the supervisory body may conduct inspections at any time, with or without prior notice, to check compliance." },
-                            { q: "What happens in case of non-compliance?", a: "Penalties, strict directions, suspension, or even cancellation of the registration certificate may be imposed by SEBI." },
-                            { q: "Is KYC mandatory for existing clients?", a: "Yes, KYC compliance norms apply to all clients, including existing ones. Records should be updated periodically." }
+                            { q: "1. What compliances are required after SEBI Investment Adviser registration?", a: "After registration, Investment Advisers must comply with client onboarding norms, risk profiling, record maintenance, periodic reporting, annual compliance audits, and investor grievance redressal requirements as prescribed by SEBI." },
+                            { q: "2. Is annual compliance audit mandatory for Investment Advisers?", a: "Yes, every registered Investment Adviser must conduct an annual compliance audit through a practising professional and submit the audit report within the prescribed timeline." },
+                            { q: "3. How long must client records be maintained?", a: "Client KYC documents, risk profiling records, advisory rationale, agreements, and communication records must be preserved for at least five years." },
+                            { q: "4. Is risk profiling compulsory for every client?", a: "Yes, risk profiling is mandatory before providing any personalised investment advice. Advice must always align with the client’s documented risk profile." },
+                            { q: "5. Is a written agreement required with clients?", a: "Yes, Investment Advisers must execute a written agreement with each client defining scope of services, fees, disclosures, and grievance redressal mechanism." },
+                            { q: "6. Can an Investment Adviser earn commission from product distribution?", a: "No, registered Investment Advisers are prohibited from earning commissions or engaging in distribution activities. Advisory and distribution must be completely segregated." },
+                            { q: "7. Are Investment Advisers required to maintain a website?", a: "Yes, a functional website displaying registration details, disclosures, services offered, and grievance redressal information is mandatory." },
+                            { q: "8. What disclosures must be made to clients?", a: "Investment Advisers must disclose their registration number, fee structure, scope of services, conflicts of interest, and limitations of advisory services." },
+                            { q: "9. Is registration on SEBI SCORES mandatory?", a: "Yes, Investment Advisers must register on the SEBI SCORES platform to receive, track, and resolve investor complaints." },
+                            { q: "10. Who is responsible for compliance in a non-individual Investment Adviser?", a: "The Principal Officer remains responsible for compliance, supported by a Compliance Officer or an independent compliance professional." },
+                            { q: "11. Are Investment Advisers subject to SEBI inspections?", a: "Yes, SEBI may conduct inspections at any time to verify compliance, documentation, and adherence to regulatory requirements." },
+                            { q: "12. What happens if an Investment Adviser fails to comply with regulations?", a: "Non-compliance may lead to penalties, directions, suspension, or cancellation of registration depending on the severity of violations." },
+                            { q: "13. Is client-level segregation mandatory?", a: "Yes, advisory clients and distribution clients must be completely separate, with no overlap in revenue, referrals, or services." },
+                            { q: "14. Are Investment Advisers required to maintain compliance manuals?", a: "Yes, maintaining documented policies and internal compliance procedures is strongly recommended and often reviewed during audits and inspections." },
+                            { q: "15. Can Investment Advisers use technology tools for advisory and compliance?", a: "Yes, technology tools may be used, provided their scope, limitations, and role in advisory are transparently disclosed to clients." },
+                            { q: "16. Are Investment Advisers required to update client information periodically?", a: "Yes, client risk profiles and financial information should be reviewed and updated periodically to ensure continued suitability of advice." },
+                            { q: "17. Is KYC compliance mandatory even for existing clients?", a: "Yes, all clients must comply with KYC norms, including updated identity and financial information, irrespective of prior relationship." },
+                            { q: "18. Are fee disclosures mandatory in advisory agreements?", a: "Yes, the fee structure, billing frequency, and mode of payment must be clearly disclosed in writing to clients." },
+                            { q: "19. Can Investment Advisers provide advice to overseas clients?", a: "Investment Advisers may advise overseas clients, subject to compliance with applicable Indian regulations and foreign exchange laws." },
+                            { q: "20. How can Investment Advisers stay compliant on an ongoing basis?", a: "Regular internal reviews, timely audits, proper documentation, updated disclosures, and continuous monitoring of regulatory changes are essential to remain compliant." }
                         ].map((faq, idx) => (
                             <details key={idx} className="group bg-slate-50 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                                <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-emerald-600 transition-colors">
-                                    {faq.q}
-                                    <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform" />
+                                <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-emerald-600 transition-colors text-left">
+                                    <span className="pr-4">{faq.q}</span>
+                                    <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
                                 </summary>
                                 <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-200">
                                     {faq.a}
