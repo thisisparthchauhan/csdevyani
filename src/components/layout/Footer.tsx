@@ -101,6 +101,8 @@ export default function Footer() {
                                 { name: 'IA Compliance', href: '/post-registration-compliance-for-investment-advisers-in-india' },
                                 { name: 'AIF Registration', href: '/alternative-investment-fund-registration-india' },
                                 { name: 'AIF Compliance', href: '/aif-compliance-obligations' },
+                                { name: 'Stock Broker Compliance', href: '/post-registration-compliance-for-stock-brokers' },
+                                { name: 'RTA Compliance', href: '/post-registration-compliance-for-rta' },
                                 { name: 'Startup Solutions', href: '/coming-soon' }
                             ].map((item) => (
                                 <li key={item.name}>
