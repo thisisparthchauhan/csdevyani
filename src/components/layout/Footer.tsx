@@ -54,6 +54,11 @@ export default function Footer() {
                                     Gandhinagar, Gujarat - 382355
                                 </span>
                             </p>
+                            <ul className="space-y-3">
+                                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                                <li><Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                                <li><Link href="#" className="text-gray-400 hover:text-white transition-colors">Cookie Policy</Link></li>
+                            </ul>
                             <p className="flex items-center group">
                                 <Phone className="mr-3 text-[var(--brand-secondary)] group-hover:text-white transition-colors" size={20} />
                                 <a href="tel:+919825600907" className="group-hover:text-white transition-colors">+91 98256 00907</a>

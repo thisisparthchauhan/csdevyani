@@ -18,6 +18,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://csdevyani-web-2025.web.app'),
   title: "CSDEVYANI | AI-Powered Corporate Governance Platform",
   description: "The unified AI-powered platform for automated company law compliance, secretarial audits, and legal excellence in India and Gift City.",
   keywords: ["Company Law", "Corporate Governance", "Secretarial Audit", "AI Compliance", "Gift City", "CSDEVYANI", "Legal Tech"],
