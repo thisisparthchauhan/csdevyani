@@ -102,6 +102,7 @@ export default function Footer() {
                                 { name: 'AIF Registration', href: '/alternative-investment-fund-registration-india' },
                                 { name: 'RTA Registration', href: '/rta-registration-india' },
                                 { name: 'AIF Compliance', href: '/aif-compliance-obligations' },
+                                { name: 'PMS Compliance', href: '/pms-compliance-obligations' },
                                 { name: 'Stock Broker Registration', href: '/stock-broker-registration-sebi' },
                                 { name: 'Stock Broker Compliance', href: '/post-registration-compliance-for-stock-brokers' },
                                 { name: 'RTA Compliance', href: '/post-registration-compliance-for-rta' },
