@@ -15,8 +15,8 @@ export default function DashboardPage() {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
-    // Tabs: 'profile' | 'security'
-    const [activeTab, setActiveTab] = useState('profile');
+    // Tabs: 'overview' | 'profile' | 'security'
+    const [activeTab, setActiveTab] = useState('overview');
 
     // Profile State
     const [profileData, setProfileData] = useState({
@@ -376,6 +376,12 @@ export default function DashboardPage() {
                         {/* Mobile Tabs */}
                         <div className="flex lg:hidden overflow-x-auto space-x-2 mb-6 pb-2 scrollbar-hide">
                             <button
+                                onClick={() => setActiveTab('overview')}
+                                className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-bold transition-all ${activeTab === 'overview' ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-500 border border-slate-200'}`}
+                            >
+                                Overview
+                            </button>
+                            <button
                                 onClick={() => setActiveTab('profile')}
                                 className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-bold transition-all ${activeTab === 'profile' ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-500 border border-slate-200'}`}
                             >
@@ -401,6 +407,74 @@ export default function DashboardPage() {
                                     {saveMessage.type === 'error' ? <AlertCircle size={16} className="mr-2" /> : <CheckCircle2 size={16} className="mr-2" />}
                                     {saveMessage.text}
                                 </motion.div>
+                            )}
+
+                            {activeTab === 'overview' && (
+                                <div className="p-6 md:p-8 space-y-8">
+                                    {/* Welcome Banner */}
+                                    <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
+                                        <div className="relative z-10">
+                                            <h2 className="text-3xl font-bold mb-2">
+                                                Welcome back, {profileData.fullName?.split(' ')[0] || 'Member'}! 👋
+                                            </h2>
+                                            <p className="text-slate-300 max-w-lg mb-6 text-sm leading-relaxed">
+                                                Your personal compliance command center. Track registrations, manage obligations, and stay updated with the latest SEBI regulations.
+                                            </p>
+                                            <div className="flex flex-wrap gap-3">
+                                                <button onClick={() => setActiveTab('profile')} className="px-5 py-2.5 bg-white text-slate-900 rounded-xl text-sm font-bold hover:bg-slate-100 transition-colors shadow-lg">
+                                                    Complete Profile {profileData.phone ? '100%' : '40%'}
+                                                </button>
+                                                <Link href="/contact" className="px-5 py-2.5 bg-white/10 text-white rounded-xl text-sm font-bold hover:bg-white/20 transition-colors backdrop-blur-sm border border-white/10">
+                                                    Talk to Expert
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {/* Status Card */}
+                                        <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 flex flex-col justify-between min-h-[180px]">
+                                            <div>
+                                                <div className="flex items-center justify-between mb-4">
+                                                    <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
+                                                        <Crown size={20} />
+                                                    </div>
+                                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Plan</span>
+                                                </div>
+                                                <h3 className="text-xl font-bold text-slate-900">Free Tier</h3>
+                                                <p className="text-xs text-slate-500 mt-1">Basic access to articles and resources.</p>
+                                            </div>
+                                            <button className="text-left text-xs font-bold text-[var(--brand-secondary)] hover:text-amber-700 transition-colors mt-4">
+                                                Upgrade to Premium →
+                                            </button>
+                                        </div>
+
+                                        {/* Quick Links */}
+                                        <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                                                    <LayoutDashboard size={20} />
+                                                </div>
+                                                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Quick Actions</span>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <Link href="/rta-registration-india" className="block text-sm font-medium text-slate-600 hover:text-[var(--brand-secondary)] transition-colors hover:translate-x-1 duration-200">
+                                                    • Start RTA Registration
+                                                </Link>
+                                                <Link href="/stock-broker-registration-sebi" className="block text-sm font-medium text-slate-600 hover:text-[var(--brand-secondary)] transition-colors hover:translate-x-1 duration-200">
+                                                    • Start Stock Broker Registration
+                                                </Link>
+                                                <Link href="/portfolio-manager-registration-india" className="block text-sm font-medium text-slate-600 hover:text-[var(--brand-secondary)] transition-colors hover:translate-x-1 duration-200">
+                                                    • Start PMS Registration
+                                                </Link>
+                                                <Link href="/articles" className="block text-sm font-medium text-slate-600 hover:text-[var(--brand-secondary)] transition-colors hover:translate-x-1 duration-200">
+                                                    • Browse Knowledge Base
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             )}
 
                             {activeTab === 'profile' && (
