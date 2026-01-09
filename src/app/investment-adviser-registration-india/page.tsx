@@ -252,21 +252,66 @@ export default function InvestmentAdviserRegistration() {
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
-                        <p className="text-slate-600 mt-2">Common queries about Investment Adviser Registration.</p>
+                        <p className="text-slate-600 mt-2">FAQs – Registration of Investment Advisers with SEBI</p>
                     </div>
 
                     <div className="space-y-4">
                         {[
-                            { q: "Who is exempt from Investment Adviser registration?", a: "Certain professionals like Lawyers, CAs, and Insurance Agents are exempt IF the advice is incidental to their primary service. Mutual fund distributors are also exempt if they only distribute (sell) products and do not offer investment advice fees." },
-                            { q: "What is the minimum qualification required?", a: "An individual IA or the Principal Officer of a non-individual IA must have a professional qualification or post-graduate degree in finance, accountancy, business management, commerce, economics, capital market, banking, insurance or actuarial science from a recognized university." },
-                            { q: "Can I offer advice on WhatsApp or Telegram?", a: "Yes, but only if you are SEBI registered. Providing tips or advice on social media platforms without registration is illegal and SEBI actively penalizes such activities." },
-                            { q: "What constitutes 'Investment Advice'?", a: "Any advice relating to investing in, purchasing, selling or otherwise dealing in securities or investment products, and advice on investment portfolio containing securities or investment products, whether written, oral or through any other means of communication for the benefit of the client and shall include financial planning." },
-                            { q: "Is NISM certification mandatory?", a: "Yes, the NISM-Series-X-A: Investment Adviser (Level 1) and NISM-Series-X-B: Investment Adviser (Level 2) certifications are mandatory." }
+                            { q: "1. What is Investment Adviser registration under SEBI?", a: "Investment Adviser registration is a mandatory approval required to provide fee-based, personalised investment advice on securities under the regulatory framework of Securities and Exchange Board of India." },
+                            { q: "2. Who is required to register as an Investment Adviser?", a: "Any individual or entity providing personalised investment advice for consideration must obtain Investment Adviser registration from SEBI." },
+                            { q: "3. Is SEBI registration mandatory for giving investment advice?", a: "Yes, providing personalised investment advice without SEBI registration is prohibited and may attract regulatory action." },
+                            { q: "4. What activities are covered under investment advisory services?", a: "Activities include portfolio advice, financial planning linked to securities, and recommendations to buy, sell, or hold securities." },
+                            { q: "5. Who is not required to obtain Investment Adviser registration?", a: "Professionals such as CAs, CSs, or lawyers are exempt only when investment advice is incidental to their primary profession and not charged separately." },
+                            { q: "6. Can an individual apply for Investment Adviser registration?", a: "Yes, individuals can apply, provided they meet the qualification, certification, and regulatory deposit requirements." },
+                            { q: "7. Can a company or LLP apply for Investment Adviser registration?", a: "Yes, companies, LLPs, and partnership firms can apply as non-individual Investment Advisers." },
+                            { q: "8. What qualifications are required for Investment Adviser registration?", a: "Applicants must possess a recognised graduate degree along with the prescribed NISM certification as specified by SEBI." },
+                            { q: "9. Is NISM certification mandatory for Investment Advisers?", a: "Yes, holding and maintaining a valid NISM certification is mandatory for registration and continued practice." },
+                            { q: "10. What is the capital or deposit requirement for Investment Advisers?", a: "SEBI requires a regulatory deposit to be maintained, the amount of which depends on whether the applicant is an individual or non-individual." },
+                            { q: "11. Is net worth requirement applicable for Investment Advisers?", a: "SEBI has shifted from a net worth model to a regulatory deposit-based framework for Investment Advisers." },
+                            { q: "12. How long does the Investment Adviser registration process take?", a: "The registration process typically takes a few months, depending on application completeness and SEBI’s review." },
+                            { q: "13. What is the application form for Investment Adviser registration?", a: "The application is made in Form A along with supporting documents and prescribed fees." },
+                            { q: "14. What government fees are payable to SEBI?", a: "Applicants must pay a non-refundable application fee and a registration fee as prescribed by SEBI." },
+                            { q: "15. Is the SEBI registration fee refundable?", a: "No, SEBI application and registration fees are non-refundable." },
+                            { q: "16. Can a fintech platform apply for Investment Adviser registration?", a: "Yes, fintech platforms offering personalised investment advice must obtain SEBI Investment Adviser registration." },
+                            { q: "17. Can Investment Advisers charge fees from clients?", a: "Yes, registered Investment Advisers are permitted to charge advisory fees within SEBI-prescribed limits and disclosure norms." },
+                            { q: "18. Can Investment Advisers earn commission from products?", a: "No, Investment Advisers are prohibited from earning commissions or incentives from product distribution." },
+                            { q: "19. What is segregation between advisory and distribution?", a: "Segregation ensures that advisory services and distribution activities are completely independent with no overlap." },
+                            { q: "20. Is client-level segregation mandatory?", a: "Yes, advisory clients and distribution clients must be completely segregated without any overlap." },
+                            { q: "21. Is infrastructure required for Investment Adviser registration?", a: "Yes, applicants must demonstrate adequate office infrastructure, systems, and compliance capabilities." },
+                            { q: "22. Is a compliance officer mandatory for Investment Advisers?", a: "Non-individual Investment Advisers must appoint a Compliance Officer or engage an independent compliance professional." },
+                            { q: "23. What is the role of a Principal Officer?", a: "The Principal Officer is responsible for regulatory compliance, governance, and communication with SEBI." },
+                            { q: "24. Can Investment Advisers operate online or digitally?", a: "Yes, Investment Advisers may operate digitally, subject to compliance with data security and disclosure requirements." },
+                            { q: "25. Is a website mandatory for Investment Advisers?", a: "Yes, registered Investment Advisers must maintain a functional website with mandatory disclosures." },
+                            { q: "26. What disclosures must be made on the website?", a: "Disclosures include registration details, services offered, fee structure, grievance mechanism, and disclaimers." },
+                            { q: "27. Is client agreement mandatory for Investment Advisers?", a: "Yes, a written agreement with each client is mandatory before providing advisory services." },
+                            { q: "28. Is risk profiling compulsory before giving advice?", a: "Yes, risk profiling is mandatory to ensure suitability of advice." },
+                            { q: "29. Can Investment Advisers advise NRIs or foreign clients?", a: "Yes, subject to compliance with Indian regulations and foreign exchange laws." },
+                            { q: "30. Can Investment Advisers advise on all types of securities?", a: "Yes, provided the advice is suitable to the client’s risk profile and properly documented." },
+                            { q: "31. Is registration valid for a lifetime?", a: "SEBI registration remains valid unless suspended or cancelled, subject to ongoing compliance." },
+                            { q: "32. Can SEBI reject an Investment Adviser application?", a: "Yes, SEBI may reject applications that do not meet eligibility or compliance standards." },
+                            { q: "33. Can a rejected applicant reapply?", a: "Yes, applicants may reapply after rectifying deficiencies, subject to SEBI guidelines." },
+                            { q: "34. Are Investment Advisers subject to SEBI inspection?", a: "Yes, SEBI has the power to inspect registered Investment Advisers at any time." },
+                            { q: "35. Is annual audit mandatory after registration?", a: "Yes, an annual compliance audit is mandatory for all registered Investment Advisers." },
+                            { q: "36. What records must be maintained by Investment Advisers?", a: "Records relating to clients, advice, agreements, communications, and fees must be maintained for the prescribed period." },
+                            { q: "37. Is KYC compliance mandatory for clients?", a: "Yes, all clients must complete KYC before receiving investment advice." },
+                            { q: "38. Is CKYC registration required for Investment Advisers?", a: "Yes, Investment Advisers are required to comply with CKYC norms." },
+                            { q: "39. Is grievance redressal mechanism mandatory?", a: "Yes, Investment Advisers must have a structured grievance redressal mechanism in place." },
+                            { q: "40. Is SCORES registration mandatory?", a: "Yes, Investment Advisers must register on the SEBI SCORES platform for investor grievance handling." },
+                            { q: "41. Can Investment Advisers outsource compliance functions?", a: "Compliance functions may be outsourced, but regulatory responsibility remains with the Investment Adviser." },
+                            { q: "42. Can Investment Advisers change their business structure after registration?", a: "Yes, but prior approval or intimation to SEBI may be required depending on the change." },
+                            { q: "43. Can Investment Advisers expand into Portfolio Management Services?", a: "Yes, but a separate SEBI registration is required for Portfolio Management Services." },
+                            { q: "44. Are Investment Advisers required to follow a code of conduct?", a: "Yes, SEBI has prescribed a code of conduct that must be followed at all times." },
+                            { q: "45. Can Investment Advisers provide model portfolios?", a: "Yes, provided the advice remains personalised and aligned with client suitability norms." },
+                            { q: "46. Is data privacy an important compliance requirement?", a: "Yes, client data must be securely stored and protected against unauthorised access." },
+                            { q: "47. What happens in case of non-compliance?", a: "SEBI may impose penalties, issue directions, or suspend or cancel registration." },
+                            { q: "48. Can Investment Advisers surrender their registration voluntarily?", a: "Yes, Investment Advisers may surrender registration by following SEBI’s prescribed procedure." },
+                            { q: "49. Is ongoing professional certification required?", a: "Yes, Investment Advisers and associated persons must maintain valid certifications as prescribed." },
+                            { q: "50. Why should Investment Advisers seek professional support for registration?", a: "Professional guidance ensures correct structuring, faster approval, and long-term regulatory compliance." }
                         ].map((faq, idx) => (
                             <details key={idx} className="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                                <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-[var(--brand-secondary)] transition-colors">
-                                    {faq.q}
-                                    <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform" />
+                                <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-[var(--brand-secondary)] transition-colors text-left">
+                                    <span className="pr-4">{faq.q}</span>
+                                    <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
                                 </summary>
                                 <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-100">
                                     {faq.a}
