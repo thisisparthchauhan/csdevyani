@@ -45,6 +45,7 @@ export default function Navbar() {
                         { name: 'AIF Compliance', href: '/aif-compliance-obligations' },
                         { name: 'PMS Registration', href: '/portfolio-manager-registration-india' },
                         { name: 'PMS Compliance', href: '/pms-compliance-obligations' },
+                        { name: 'DP Registration', href: '/depository-participant-registration-india' },
                         { name: 'DP Compliance', href: '/depository-participant-compliance-obligations' },
                         { name: 'Investment Adviser Registration', href: '/investment-adviser-registration-india' },
                         { name: 'RTA Registration', href: '/rta-registration-india' },
