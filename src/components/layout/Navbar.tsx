@@ -44,6 +44,7 @@ export default function Navbar() {
                         { name: 'AIF Registration', href: '/alternative-investment-fund-registration-india' },
                         { name: 'AIF Compliance', href: '/aif-compliance-obligations' },
                         { name: 'Investment Adviser Registration', href: '/investment-adviser-registration-india' },
+                        { name: 'RTA Registration', href: '/rta-registration-india' },
                         { name: 'IA Compliance', href: '/post-registration-compliance-for-investment-advisers-in-india' },
                         { name: 'Stock Broker Compliance', href: '/post-registration-compliance-for-stock-brokers' },
                         { name: 'RTA Compliance', href: '/post-registration-compliance-for-rta' },
