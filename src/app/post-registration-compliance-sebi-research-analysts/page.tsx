@@ -621,6 +621,83 @@ export default function PostRegistrationComplianceSEBI() {
                 </div>
             </section>
 
+            {/* FAQs – SEBI Research Analyst Registration & Compliance */}
+            <section className="py-16 md:py-24 bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold text-slate-900">FAQs – SEBI Research Analyst Registration & Compliance</h2>
+                            <p className="text-slate-600 mt-2">Common questions regarding post-registration obligations.</p>
+                        </div>
+
+                        <div className="space-y-4">
+                            {[
+                                { q: "1. What is SEBI Research Analyst registration?", a: "SEBI Research Analyst registration is a mandatory approval required for individuals or entities providing research reports, stock recommendations, price targets, or trading opinions related to securities." },
+                                { q: "2. Who is required to obtain Research Analyst registration?", a: "Any person or organisation issuing research opinions or recommendations for consideration must obtain registration before commencing such activities." },
+                                { q: "3. Can someone publish research reports without SEBI registration?", a: "No. Publishing or distributing research without registration is treated as unauthorised activity and may attract regulatory action." },
+                                { q: "4. Which regulations govern Research Analysts in India?", a: "Research Analysts are governed under the SEBI (Research Analysts) Regulations, 2014, along with subsequent amendments and circulars." },
+                                { q: "5. What qualifications are required to become a Research Analyst?", a: "Applicants must meet prescribed educational requirements and hold a valid NISM Research Analyst certification." },
+                                { q: "6. Is a finance degree compulsory for Research Analyst registration?", a: "A finance degree is not compulsory if the applicant holds the prescribed certification and meets eligibility norms." },
+                                { q: "7. What certification is mandatory for Research Analysts?", a: "A valid NISM Research Analyst certification, as prescribed by SEBI, is mandatory." },
+                                { q: "8. What does “fit and proper” criteria mean for Research Analysts?", a: "It refers to integrity, reputation, financial soundness, and regulatory track record of the applicant and key persons." },
+                                { q: "9. Is a security deposit required after registration?", a: "Yes. Research Analysts must maintain a security deposit based on the size of their client base." },
+                                { q: "10. How is the security deposit amount decided?", a: "The amount depends on the number of clients served by the Research Analyst." },
+                                { q: "11. Where is the Research Analyst application submitted?", a: "The application is submitted to SEBI in the prescribed format along with supporting documents and fees." },
+                                { q: "12. Can foreign entities register as Research Analysts in India?", a: "Foreign entities generally cannot directly register; research for Indian clients must be routed through a registered entity." },
+                                { q: "13. What documents are required for Research Analyst registration?", a: "Documents include application forms, qualification proofs, certification details, business plan, and internal policies." },
+                                { q: "14. Is physical or IT infrastructure evaluated by SEBI?", a: "Yes. SEBI assesses whether the applicant has adequate infrastructure to conduct research activities responsibly." },
+                                { q: "15. Is appointment of a Principal Officer mandatory?", a: "Yes, for non-individual applicants, a Principal Officer must be designated to oversee compliance." },
+                                { q: "16. Can a Research Analyst distribute financial products?", a: "No. Research Analysts are prohibited from distribution unless separately registered under applicable regulations." },
+                                { q: "17. Can one entity hold both Research Analyst and Investment Adviser registrations?", a: "Yes, but strict segregation of activities, teams, and disclosures must be maintained." },
+                                { q: "18. Are Research Analysts allowed to charge fees?", a: "Yes, Research Analysts may charge fees, subject to transparency and disclosure requirements." },
+                                { q: "19. Is advance fee collection permitted?", a: "Advance fees are permitted within regulatory limits and subject to refund and disclosure norms." },
+                                { q: "20. Does Research Analyst registration require renewal every year?", a: "Registration remains valid unless suspended or cancelled, but ongoing compliance and fee obligations apply." },
+                                { q: "21. Are conflict of interest policies mandatory?", a: "Yes. Research Analysts must have documented conflict management policies." },
+                                { q: "22. What disclosures are mandatory in research reports?", a: "Disclosures include registration details, analyst identity, conflicts of interest, and compensation links." },
+                                { q: "23. Are Research Analysts allowed to advertise their services?", a: "Promotional activities are restricted and must not be misleading or solicit public investments." },
+                                { q: "24. Are there restrictions on personal trading by Research Analysts?", a: "Yes. Personal trading must comply with internal policies to prevent misuse of information." },
+                                { q: "25. Is continuous professional education required?", a: "Research Analysts must maintain valid certifications and stay updated with regulatory changes." },
+                                { q: "26. Is website compliance mandatory for Research Analysts?", a: "Yes. Registration details and disclosures must be prominently displayed on websites and digital platforms." },
+                                { q: "27. Can Research Analysts publish research on social media platforms?", a: "Yes, provided all disclosures and registration details accompany such publications." },
+                                { q: "28. How does SEBI monitor Research Analyst compliance?", a: "SEBI monitors compliance through reporting, audits, inspections, and grievance mechanisms." },
+                                { q: "29. What records must Research Analysts maintain?", a: "Records of research reports, data sources, disclosures, client communications, and trades must be preserved." },
+                                { q: "30. Is an annual compliance audit mandatory?", a: "Yes. Research Analysts must undergo an annual compliance audit by a qualified professional." },
+                                { q: "31. Are audit observations reportable to SEBI?", a: "Material audit findings must be addressed and reported as required." },
+                                { q: "32. Can SEBI amend Research Analyst regulations?", a: "Yes. SEBI may amend regulations or issue clarifications from time to time." },
+                                { q: "33. Does the number of clients affect compliance requirements?", a: "Yes. Client volume impacts security deposit and reporting obligations." },
+                                { q: "34. Why is a security deposit required?", a: "The deposit acts as financial assurance for investor protection and regulatory enforcement." },
+                                { q: "35. Is membership of a supervisory body required?", a: "Yes. Research Analysts must be associated with a recognised supervisory body." },
+                                { q: "36. Can compliance functions be outsourced?", a: "Compliance functions may be outsourced, but responsibility remains with the Research Analyst." },
+                                { q: "37. How long does the registration process usually take?", a: "Timelines vary based on documentation quality and regulatory clarifications." },
+                                { q: "38. Can a Research Analyst refuse to onboard a client?", a: "Yes. Research Analysts may refuse engagements that conflict with regulations or independence." },
+                                { q: "39. Are Research Analysts allowed to analyse complex products?", a: "Yes, provided adequate expertise and disclosures are maintained." },
+                                { q: "40. Is a separate bank account required for research activities?", a: "Maintaining a separate account is considered a good governance practice." },
+                                { q: "41. Can SEBI suspend Research Analyst registration?", a: "Yes. SEBI may suspend or cancel registration for serious non-compliance." },
+                                { q: "42. Is client consent required for disclosures?", a: "Clients must acknowledge disclosures before availing research services." },
+                                { q: "43. Can Research Analysts provide investment advice?", a: "No. Investment advice requires separate registration as an Investment Adviser." },
+                                { q: "44. Are financial projections allowed in research reports?", a: "Yes, provided assumptions and risks are clearly explained." },
+                                { q: "45. Is there a cap on Research Analyst fees?", a: "Fees must be reasonable, transparent, and fairly disclosed." },
+                                { q: "46. Can unregistered individuals assist in research preparation?", a: "Only registered Research Analysts can issue research under their name." },
+                                { q: "47. Can Research Analysts run paid newsletters or subscriptions?", a: "Yes, subject to full compliance with disclosure and conduct norms." },
+                                { q: "48. Are Research Analysts liable for misleading research?", a: "Yes. Misleading or biased research may result in regulatory penalties." },
+                                { q: "49. Is a grievance redressal mechanism mandatory?", a: "Yes. Research Analysts must maintain a formal grievance redressal process." },
+                                { q: "50. How can Research Analysts ensure long-term compliance?", a: "By maintaining disciplined disclosures, proper records, internal controls, and regulatory awareness." }
+                            ].map((faq, idx) => (
+                                <details key={idx} className="group bg-slate-50 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                                    <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:text-purple-600 transition-colors text-left">
+                                        <span className="pr-4">{faq.q}</span>
+                                        <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+                                    </summary>
+                                    <div className="p-5 pt-0 text-slate-600 leading-relaxed border-t border-transparent group-open:border-slate-200">
+                                        {faq.a}
+                                    </div>
+                                </details>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* HOW WE SUPPORT */}
             <section className="py-16 md:py-24 bg-white">
                 <div className="container mx-auto px-4">
