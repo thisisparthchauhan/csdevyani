@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { auth, db } from '@/lib/firebase';
+import { auth, db, storage } from '@/lib/firebase';
 import { signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Link from 'next/link';
-import { User, LogOut, FileText, Settings, Shield, ExternalLink, LayoutDashboard, Crown, Save, Briefcase, Calendar, Building, Lock, Bell, Camera, ChevronRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { User, LogOut, FileText, Settings, Shield, ExternalLink, LayoutDashboard, Crown, Save, Briefcase, Calendar, Building, Lock, Bell, Camera, ChevronRight, CheckCircle2, AlertCircle, Eye, EyeOff, Edit2, X } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,8 +27,11 @@ export default function DashboardPage() {
         companyName: '',
         position: '',
         bio: '',
-        website: ''
+        website: '',
+        photoURL: ''
     });
+
+    const [isEditing, setIsEditing] = useState(false);
 
     // Password State
     const [passState, setPassState] = useState({
@@ -35,6 +39,10 @@ export default function DashboardPage() {
         newPassword: '',
         confirmNewPassword: ''
     });
+
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
     const [isSaving, setIsSaving] = useState(false);
     const [saveMessage, setSaveMessage] = useState({ type: '', text: '' });
@@ -168,6 +176,41 @@ export default function DashboardPage() {
         }
     };
 
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || !e.target.files[0] || !user) return;
+
+        const file = e.target.files[0];
+        // Validate size (max 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            setSaveMessage({ type: 'error', text: 'Image size must be less than 2MB.' });
+            return;
+        }
+
+        try {
+            setSaveMessage({ type: '', text: 'Uploading image...' });
+
+            const storageRef = ref(storage, `profile_pictures/${user.uid}`);
+            await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(storageRef);
+
+            // Update in Firestore
+            await setDoc(doc(db, 'users', user.uid), {
+                photoURL: downloadURL,
+                updatedAt: new Date()
+            }, { merge: true });
+
+            // Update local state
+            setProfileData(prev => ({ ...prev, photoURL: downloadURL }));
+            setSaveMessage({ type: 'success', text: 'Profile picture updated!' });
+
+            setTimeout(() => setSaveMessage({ type: '', text: '' }), 3000);
+
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            setSaveMessage({ type: 'error', text: 'Failed to upload image.' });
+        }
+    };
+
     const handleUpdatePassword = async (e: React.FormEvent) => {
         e.preventDefault();
         setSaveMessage({ type: '', text: '' });
@@ -295,14 +338,28 @@ export default function DashboardPage() {
                             <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-slate-100 to-slate-50"></div>
                             <div className="relative flex flex-col items-center mt-4">
                                 <div className="relative">
-                                    <div className="w-24 h-24 rounded-full bg-white p-1 shadow-lg ring-1 ring-slate-100">
-                                        <div className="w-full h-full bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
-                                            <User size={40} />
-                                        </div>
+                                    <div className="w-24 h-24 rounded-full bg-white p-1 shadow-lg ring-1 ring-slate-100 relative overflow-hidden">
+                                        {profileData.photoURL ? (
+                                            <img
+                                                src={profileData.photoURL}
+                                                alt="Profile"
+                                                className="w-full h-full rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
+                                                <User size={40} />
+                                            </div>
+                                        )}
                                     </div>
-                                    <button className="absolute bottom-1 right-1 bg-slate-900 text-white p-2 rounded-full shadow-lg hover:bg-[var(--brand-secondary)] transition-colors">
+                                    <label className="absolute bottom-1 right-1 bg-slate-900 text-white p-2 rounded-full shadow-lg hover:bg-[var(--brand-secondary)] transition-colors cursor-pointer">
                                         <Camera size={14} />
-                                    </button>
+                                        <input
+                                            type="file"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={handleImageUpload}
+                                        />
+                                    </label>
                                 </div>
                                 <h2 className="mt-4 text-xl font-bold text-slate-900">{profileData.fullName || 'User'}</h2>
                                 <p className="text-sm text-slate-500 mb-4">{user.email}</p>
@@ -479,9 +536,28 @@ export default function DashboardPage() {
 
                             {activeTab === 'profile' && (
                                 <div className="p-6 md:p-8">
-                                    <div className="mb-6">
-                                        <h3 className="text-xl font-bold text-slate-900">Personal Information</h3>
-                                        <p className="text-sm text-slate-500">Update your photo and personal details here.</p>
+                                    <div className="flex items-center justify-between mb-6">
+                                        <div>
+                                            <h3 className="text-xl font-bold text-slate-900">Personal Information</h3>
+                                            <p className="text-sm text-slate-500">View and update your personal details.</p>
+                                        </div>
+                                        {!isEditing ? (
+                                            <button
+                                                onClick={() => setIsEditing(true)}
+                                                className="flex items-center space-x-2 bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-slate-50 hover:text-[var(--brand-secondary)] transition-colors shadow-sm"
+                                            >
+                                                <Edit2 size={16} />
+                                                <span>Edit Info</span>
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() => setIsEditing(false)}
+                                                className="flex items-center space-x-2 bg-red-50 text-red-600 px-4 py-2 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors"
+                                            >
+                                                <X size={16} />
+                                                <span>Cancel</span>
+                                            </button>
+                                        )}
                                     </div>
 
                                     <form onSubmit={handleSaveProfile} className="space-y-6">
@@ -489,68 +565,86 @@ export default function DashboardPage() {
                                             {/* Name */}
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Full Name</label>
-                                                <input
-                                                    type="text"
-                                                    name="fullName"
-                                                    value={profileData.fullName}
-                                                    onChange={handleProfileChange}
-                                                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
-                                                    placeholder="Your Name"
-                                                />
+                                                {isEditing ? (
+                                                    <input
+                                                        type="text"
+                                                        name="fullName"
+                                                        value={profileData.fullName}
+                                                        onChange={handleProfileChange}
+                                                        className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                        placeholder="Your Name"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full px-4 py-3 bg-slate-50 border border-transparent rounded-xl text-slate-800 font-bold">
+                                                        {profileData.fullName || '-'}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {/* Phone */}
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Phone Number</label>
-                                                <div className="relative">
-                                                    <PhoneInput
-                                                        country={'in'}
-                                                        value={profileData.phone}
-                                                        onChange={(phone) => setProfileData({ ...profileData, phone })}
-                                                        inputStyle={{
-                                                            width: '100%',
-                                                            height: '42px',
-                                                            borderRadius: '0.75rem',
-                                                            border: '1px solid #e2e8f0',
-                                                            backgroundColor: '#f8fafc',
-                                                            fontSize: '0.875rem',
-                                                            paddingLeft: '48px',
-                                                            fontWeight: 500
-                                                        }}
-                                                        buttonStyle={{
-                                                            borderRadius: '0.75rem 0 0 0.75rem',
-                                                            border: '1px solid #e2e8f0',
-                                                            borderRight: 'none',
-                                                            backgroundColor: 'transparent'
-                                                        }}
-                                                        containerClass="w-full"
-                                                    />
-                                                </div>
+                                                {isEditing ? (
+                                                    <div className="relative">
+                                                        <PhoneInput
+                                                            country={'in'}
+                                                            value={profileData.phone}
+                                                            onChange={(phone) => setProfileData({ ...profileData, phone })}
+                                                            inputStyle={{
+                                                                width: '100%',
+                                                                height: '42px',
+                                                                borderRadius: '0.75rem',
+                                                                border: '1px solid #e2e8f0',
+                                                                backgroundColor: '#f8fafc',
+                                                                fontSize: '0.875rem',
+                                                                paddingLeft: '48px',
+                                                                fontWeight: 500
+                                                            }}
+                                                            buttonStyle={{
+                                                                borderRadius: '0.75rem 0 0 0.75rem',
+                                                                border: '1px solid #e2e8f0',
+                                                                borderRight: 'none',
+                                                                backgroundColor: 'transparent'
+                                                            }}
+                                                            containerClass="w-full"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-full px-4 py-3 bg-slate-50 border border-transparent rounded-xl text-slate-800 font-medium font-mono">
+                                                        {profileData.phone || '-'}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {/* DOB */}
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Date of Birth</label>
-                                                <div className="relative">
-                                                    <Calendar size={16} className="absolute left-3 top-3 text-slate-400" />
-                                                    <input
-                                                        type="date"
-                                                        name="dob"
-                                                        value={profileData.dob}
-                                                        onChange={handleProfileChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium text-slate-600"
-                                                    />
-                                                </div>
+                                                {isEditing ? (
+                                                    <div className="relative">
+                                                        <Calendar size={16} className="absolute left-3 top-3 text-slate-400" />
+                                                        <input
+                                                            type="date"
+                                                            name="dob"
+                                                            value={profileData.dob}
+                                                            onChange={handleProfileChange}
+                                                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium text-slate-600"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-full px-4 py-3 bg-slate-50 border border-transparent rounded-xl text-slate-800 font-medium">
+                                                        {profileData.dob || '-'}
+                                                    </div>
+                                                )}
                                             </div>
 
-                                            {/* Email (Read Only) */}
+                                            {/* Email (Always Read Only) */}
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Email Address</label>
                                                 <input
                                                     type="email"
                                                     value={user.email || ''}
                                                     disabled
-                                                    className="w-full px-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 font-medium cursor-not-allowed"
+                                                    className="w-full px-4 py-3 bg-slate-100 border border-transparent rounded-xl text-slate-500 font-medium cursor-not-allowed"
                                                 />
                                             </div>
                                         </div>
@@ -561,78 +655,113 @@ export default function DashboardPage() {
                                             {/* Company */}
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Company Name</label>
-                                                <div className="relative">
-                                                    <Building size={16} className="absolute left-3 top-3 text-slate-400" />
-                                                    <input
-                                                        type="text"
-                                                        name="companyName"
-                                                        value={profileData.companyName}
-                                                        onChange={handleProfileChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
-                                                        placeholder="Company Name"
-                                                    />
-                                                </div>
+                                                {isEditing ? (
+                                                    <div className="relative">
+                                                        <Building size={16} className="absolute left-3 top-3 text-slate-400" />
+                                                        <input
+                                                            type="text"
+                                                            name="companyName"
+                                                            value={profileData.companyName}
+                                                            onChange={handleProfileChange}
+                                                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                            placeholder="Company Name"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-full px-4 py-3 bg-slate-50 border border-transparent rounded-xl text-slate-800 font-medium flex items-center">
+                                                        <Building size={16} className="text-slate-400 mr-2" />
+                                                        {profileData.companyName || '-'}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {/* Role */}
                                             <div className="space-y-1.5">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Designation</label>
-                                                <div className="relative">
-                                                    <Briefcase size={16} className="absolute left-3 top-3 text-slate-400" />
-                                                    <input
-                                                        type="text"
-                                                        name="position"
-                                                        value={profileData.position}
-                                                        onChange={handleProfileChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
-                                                        placeholder="e.g. Director"
-                                                    />
-                                                </div>
+                                                {isEditing ? (
+                                                    <div className="relative">
+                                                        <Briefcase size={16} className="absolute left-3 top-3 text-slate-400" />
+                                                        <input
+                                                            type="text"
+                                                            name="position"
+                                                            value={profileData.position}
+                                                            onChange={handleProfileChange}
+                                                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                            placeholder="e.g. Director"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-full px-4 py-3 bg-slate-50 border border-transparent rounded-xl text-slate-800 font-medium flex items-center">
+                                                        <Briefcase size={16} className="text-slate-400 mr-2" />
+                                                        {profileData.position || '-'}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {/* Website */}
                                             <div className="space-y-1.5 md:col-span-2">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Website / LinkedIn</label>
-                                                <div className="relative">
-                                                    <ExternalLink size={16} className="absolute left-3 top-3 text-slate-400" />
-                                                    <input
-                                                        type="text"
-                                                        name="website"
-                                                        value={profileData.website || ''}
-                                                        onChange={handleProfileChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
-                                                        placeholder="https://..."
-                                                    />
-                                                </div>
+                                                {isEditing ? (
+                                                    <div className="relative">
+                                                        <ExternalLink size={16} className="absolute left-3 top-3 text-slate-400" />
+                                                        <input
+                                                            type="text"
+                                                            name="website"
+                                                            value={profileData.website || ''}
+                                                            onChange={handleProfileChange}
+                                                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                            placeholder="https://..."
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-full px-4 py-3 bg-slate-50 border border-transparent rounded-xl text-blue-600 font-medium flex items-center">
+                                                        <ExternalLink size={16} className="text-slate-400 mr-2" />
+                                                        {profileData.website ? (
+                                                            <a href={profileData.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                                                {profileData.website}
+                                                            </a>
+                                                        ) : (
+                                                            <span className="text-slate-400">-</span>
+                                                        )}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
 
                                         {/* Bio */}
                                         <div className="space-y-1.5">
                                             <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">About Me</label>
-                                            <textarea
-                                                name="bio"
-                                                value={profileData.bio || ''}
-                                                onChange={handleProfileChange}
-                                                rows={3}
-                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium resize-none"
-                                                placeholder="Write a short bio..."
-                                            ></textarea>
+                                            {isEditing ? (
+                                                <textarea
+                                                    name="bio"
+                                                    value={profileData.bio || ''}
+                                                    onChange={handleProfileChange}
+                                                    rows={3}
+                                                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium resize-none"
+                                                    placeholder="Write a short bio..."
+                                                ></textarea>
+                                            ) : (
+                                                <div className="w-full px-4 py-4 bg-slate-50 border border-transparent rounded-xl text-slate-600 font-medium italic">
+                                                    {profileData.bio ? `"${profileData.bio}"` : 'No bio added.'}
+                                                </div>
+                                            )}
                                         </div>
 
-                                        <div className="flex justify-end pt-4">
-                                            <button
-                                                type="submit"
-                                                disabled={isSaving}
-                                                className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-[var(--brand-secondary)] transition-all shadow-lg hover:shadow-xl flex items-center disabled:opacity-70 disabled:cursor-not-allowed"
-                                            >
-                                                {isSaving ? (
-                                                    <span className="flex items-center"><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div> Saving...</span>
-                                                ) : (
-                                                    <>Save Changes</>
-                                                )}
-                                            </button>
-                                        </div>
+                                        {isEditing && (
+                                            <div className="flex justify-end pt-4">
+                                                <button
+                                                    type="submit"
+                                                    disabled={isSaving}
+                                                    className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-[var(--brand-secondary)] transition-all shadow-lg hover:shadow-xl flex items-center disabled:opacity-70 disabled:cursor-not-allowed"
+                                                >
+                                                    {isSaving ? (
+                                                        <span className="flex items-center"><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div> Saving...</span>
+                                                    ) : (
+                                                        <>Save Changes</>
+                                                    )}
+                                                </button>
+                                            </div>
+                                        )}
                                     </form>
                                 </div>
                             )}
@@ -660,14 +789,17 @@ export default function DashboardPage() {
                                                 <div className="relative">
                                                     <Lock size={16} className="absolute left-3 top-3 text-slate-400" />
                                                     <input
-                                                        type="password"
+                                                        type={showCurrentPassword ? "text" : "password"}
                                                         name="currentPassword"
                                                         required
                                                         value={passState.currentPassword}
                                                         onChange={handlePassChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                        className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
                                                         placeholder="••••••••"
                                                     />
+                                                    <button type="button" onClick={() => setShowCurrentPassword(!showCurrentPassword)} className="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+                                                        {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -676,14 +808,17 @@ export default function DashboardPage() {
                                                 <div className="relative">
                                                     <Lock size={16} className="absolute left-3 top-3 text-slate-400" />
                                                     <input
-                                                        type="password"
+                                                        type={showNewPassword ? "text" : "password"}
                                                         name="newPassword"
                                                         required
                                                         value={passState.newPassword}
                                                         onChange={handlePassChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                        className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
                                                         placeholder="••••••••"
                                                     />
+                                                    <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+                                                        {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -692,14 +827,17 @@ export default function DashboardPage() {
                                                 <div className="relative">
                                                     <Lock size={16} className="absolute left-3 top-3 text-slate-400" />
                                                     <input
-                                                        type="password"
+                                                        type={showConfirmNewPassword ? "text" : "password"}
                                                         name="confirmNewPassword"
                                                         required
                                                         value={passState.confirmNewPassword}
                                                         onChange={handlePassChange}
-                                                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
+                                                        className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[var(--brand-secondary)] focus:border-transparent outline-none transition-all font-medium"
                                                         placeholder="••••••••"
                                                     />
+                                                    <button type="button" onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)} className="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+                                                        {showConfirmNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
