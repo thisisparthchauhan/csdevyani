@@ -29,6 +29,8 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const [activeCategory, setActiveCategory] = useState<string>('RBI Services');
+
     const navItems = [
         {
             name: 'About Us',
@@ -39,7 +41,36 @@ export default function Navbar() {
             hasDropdown: true,
             subItems: [
                 {
-                    category: 'SEBI',
+                    category: 'RBI Services',
+                    items: [
+                        { name: 'NBFC Loan Portfolio Audit', href: '#' },
+                        { name: 'FEMA Registration Services', href: '#' },
+                        { name: 'Mortgage Guarantee Company', href: '#' },
+                        { name: 'Capital Adequacy Planning for NBFCs', href: '#' },
+                        { name: 'Asset Liability Management for NBFCs', href: '#' },
+                        { name: 'Cyber Security Audit for NBFCs', href: '#' },
+                        { name: 'Lend Tech', href: '#' },
+                        { name: 'TPAP License', href: '#' },
+                        { name: 'NBFC financial modeling', href: '#' },
+                        { name: 'NBFC for Sale', href: '#' },
+                        { name: 'Alternative Asset Portfolio Valuation', href: '#' },
+                        { name: 'NBFC Registration', href: '#' },
+                        { name: 'NBFC Business Plan', href: '#' },
+                        { name: 'NBFC Due Diligence', href: '#' },
+                        { name: 'NBFC Debt Recovery Advisory', href: '#' },
+                        { name: 'NBFC Legal Support', href: '#' },
+                        { name: 'NBFC Takeover', href: '#' },
+                        { name: 'NBFC Marketing', href: '#' },
+                        { name: 'Compliance under FEMA', href: '#' },
+                        { name: 'Conversion Of NBFC Into Bank', href: '#' },
+                        { name: 'NBFC Account Aggregator (AA) License', href: '#' },
+                        { name: 'Peer to Peer Lending License', href: '#' },
+                        { name: 'Full Fledged Money Changers', href: '#' },
+                        { name: 'Prepaid Wallet License', href: '#' },
+                    ]
+                },
+                {
+                    category: 'SEBI Services',
                     items: [
                         { name: 'AIF Registration', href: '/alternative-investment-fund-registration-india' },
                         { name: 'AIF Compliance', href: '/aif-compliance-obligations' },
@@ -48,7 +79,6 @@ export default function Navbar() {
                         { name: 'DP Registration', href: '/depository-participant-registration-india' },
                         { name: 'DP Compliance', href: '/depository-participant-compliance-obligations' },
                         { name: 'Investment Adviser Registration', href: '/investment-adviser-registration-india' },
-                        { name: 'RTA Registration', href: '/rta-registration-india' },
                         { name: 'IA Compliance', href: '/post-registration-compliance-for-investment-advisers-in-india' },
                         { name: 'Stock Broker Registration', href: '/stock-broker-registration-sebi' },
                         { name: 'Stock Broker Compliance', href: '/post-registration-compliance-for-stock-brokers' },
@@ -61,11 +91,47 @@ export default function Navbar() {
                         { name: 'Fund Management', href: '/coming-soon' },
                         { name: 'Banking Units', href: '/coming-soon' },
                     ]
-                }
+                },
+                {
+                    category: 'IRDA Registration',
+                    items: [
+                        { name: 'Coming Soon', href: '#' },
+                    ]
+                },
+                {
+                    category: 'AML Advisory',
+                    items: [
+                        { name: 'Coming Soon', href: '#' },
+                    ]
+                },
+                {
+                    category: 'IBC Services',
+                    items: [
+                        { name: 'Coming Soon', href: '#' },
+                    ]
+                },
+                {
+                    category: 'Recovery of Shares',
+                    items: [
+                        { name: 'Coming Soon', href: '#' },
+                    ]
+                },
+                {
+                    category: 'NBFC Compliance',
+                    items: [
+                        { name: 'Coming Soon', href: '#' },
+                    ]
+                },
+                {
+                    category: 'IRDA Compliance',
+                    items: [
+                        { name: 'Coming Soon', href: '#' },
+                    ]
+                },
             ]
         },
         {
-            name: 'Resources',
+            name: 'Articles',
             href: '/articles'
         },
         {
@@ -113,30 +179,47 @@ export default function Navbar() {
                                         <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
                                     </button>
 
-                                    {/* Dropdown Menu */}
-                                    <div className={`absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transition-all duration-300 ${openDropdown === item.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
-                                        <div className="p-4">
-                                            {item.subItems?.map((category, idx) => (
-                                                <div key={idx} className={idx > 0 ? 'mt-4 pt-4 border-t border-slate-100' : ''}>
-                                                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-2">
+                                    {/* Mega Menu Dropdown */}
+                                    <div className={`absolute top-full -left-20 mt-2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transition-all duration-300 ${openDropdown === item.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+                                        <div className="flex">
+                                            {/* Sidebar */}
+                                            <div className="w-1/4 bg-slate-50 border-r border-slate-100 p-4">
+                                                {item.subItems?.map((category, idx) => (
+                                                    <button
+                                                        key={idx}
+                                                        onMouseEnter={() => setActiveCategory(category.category)}
+                                                        className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all mb-1 flex justify-between items-center ${activeCategory === category.category ? 'bg-white text-[var(--brand-secondary)] shadow-sm' : 'text-slate-600 hover:bg-slate-100'}`}
+                                                    >
                                                         {category.category}
-                                                    </div>
-                                                    <div className="space-y-1">
-                                                        {category.items.map((subItem) => {
-                                                            const isActive = pathname === subItem.href;
-                                                            return (
+                                                        {activeCategory === category.category && <div className="w-1.5 h-1.5 rounded-full bg-[var(--brand-secondary)]"></div>}
+                                                    </button>
+                                                ))}
+                                            </div>
+
+                                            {/* Content Area */}
+                                            <div className="w-3/4 p-6 min-h-[400px]">
+                                                {item.subItems?.map((category, idx) => (
+                                                    <div key={idx} className={`${activeCategory === category.category ? 'block' : 'hidden'}`}>
+                                                        <h3 className="text-xl font-bold text-[var(--brand-primary)] mb-6 border-b border-slate-100 pb-3">
+                                                            {category.category}
+                                                        </h3>
+                                                        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+                                                            {category.items.map((subItem) => (
                                                                 <Link
-                                                                    key={subItem.href}
+                                                                    key={subItem.name}
                                                                     href={subItem.href}
-                                                                    className={`block px-3 py-2 rounded-lg text-sm transition-all ${isActive ? 'bg-[var(--brand-secondary)]/10 text-[var(--brand-secondary)] font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-[var(--brand-primary)]'}`}
+                                                                    className="flex items-start group/item"
                                                                 >
-                                                                    {subItem.name}
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 mr-2 group-hover/item:bg-[var(--brand-secondary)] transition-colors"></div>
+                                                                    <span className="text-sm text-slate-600 group-hover/item:text-[var(--brand-primary)] transition-colors leading-relaxed">
+                                                                        {subItem.name}
+                                                                    </span>
                                                                 </Link>
-                                                            );
-                                                        })}
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))}
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -200,16 +283,21 @@ export default function Navbar() {
                                     <div key={item.name}>
                                         <div className="font-bold text-slate-900 mb-2">{item.name}</div>
                                         {item.subItems?.map((category, idx) => (
-                                            <div key={idx} className="ml-4 mb-3">
-                                                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
+                                            <div key={idx} className="ml-4 mb-4 border-l-2 border-slate-100 pl-3">
+                                                <button
+                                                    onClick={() => setActiveCategory(activeCategory === category.category ? '' : category.category)}
+                                                    className="flex items-center justify-between w-full text-sm font-bold text-slate-700 mb-2"
+                                                >
                                                     {category.category}
-                                                </div>
-                                                <div className="space-y-1">
+                                                    <ChevronDown size={14} className={`transform transition-transform ${activeCategory === category.category ? 'rotate-180' : ''}`} />
+                                                </button>
+
+                                                <div className={`space-y-2 overflow-hidden transition-all duration-300 ${activeCategory === category.category ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                                                     {category.items.map((subItem) => {
                                                         const isActive = pathname === subItem.href;
                                                         return (
                                                             <Link
-                                                                key={subItem.href}
+                                                                key={subItem.name}
                                                                 href={subItem.href}
                                                                 className={`block py-2 text-sm ${isActive ? 'text-[var(--brand-secondary)] font-bold' : 'text-slate-600'}`}
                                                                 onClick={() => setIsMenuOpen(false)}

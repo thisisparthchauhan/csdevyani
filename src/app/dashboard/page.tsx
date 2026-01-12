@@ -180,7 +180,6 @@ export default function DashboardPage() {
         if (!e.target.files || !e.target.files[0] || !user) return;
 
         const file = e.target.files[0];
-        // Validate size (max 2MB)
         if (file.size > 2 * 1024 * 1024) {
             setSaveMessage({ type: 'error', text: 'Image size must be less than 2MB.' });
             return;
@@ -190,24 +189,33 @@ export default function DashboardPage() {
             setSaveMessage({ type: '', text: 'Uploading image...' });
 
             const storageRef = ref(storage, `profile_pictures/${user.uid}`);
-            await uploadBytes(storageRef, file);
+
+            // Create a timeout promise
+            const timeoutPromise = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("Upload timed out. Check connection or Storage permissions.")), 15000)
+            );
+
+            // Race between upload and timeout
+            await Promise.race([
+                uploadBytes(storageRef, file),
+                timeoutPromise
+            ]);
+
             const downloadURL = await getDownloadURL(storageRef);
 
-            // Update in Firestore
             await setDoc(doc(db, 'users', user.uid), {
                 photoURL: downloadURL,
                 updatedAt: new Date()
             }, { merge: true });
 
-            // Update local state
             setProfileData(prev => ({ ...prev, photoURL: downloadURL }));
             setSaveMessage({ type: 'success', text: 'Profile picture updated!' });
 
             setTimeout(() => setSaveMessage({ type: '', text: '' }), 3000);
 
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error uploading image:", error);
-            setSaveMessage({ type: 'error', text: 'Failed to upload image.' });
+            setSaveMessage({ type: 'error', text: error.message || 'Failed to upload image.' });
         }
     };
 

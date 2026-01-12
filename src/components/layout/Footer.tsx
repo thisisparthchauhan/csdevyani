@@ -17,7 +17,7 @@ export default function Footer() {
         setStatus('loading');
         try {
             await addDoc(collection(db, 'subscribers'), {
-                email: email,
+                email: email.trim(),
                 subscribedAt: serverTimestamp(),
                 source: 'website_footer'
             });

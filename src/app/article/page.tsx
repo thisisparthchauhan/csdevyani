@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect, Suspense } from 'react';
-import { db } from '@/lib/firebase';
+import { db, auth } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, User, Clock, ArrowLeft, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Calendar, User, Clock, ArrowLeft, Share2, Facebook, Twitter, Linkedin, Edit } from 'lucide-react';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function ArticleContent() {
     const searchParams = useSearchParams();
@@ -12,6 +13,19 @@ function ArticleContent() {
     const id = searchParams.get('id');
     const [article, setArticle] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            const allowedEmails = ['chauhanparth165@gmail.com', 'universetcenter@gmail.com', 'compliance@csdevyani.com'];
+            if (user && user.email && allowedEmails.includes(user.email)) {
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
     useEffect(() => {
         if (!id) {
@@ -136,6 +150,19 @@ function ArticleContent() {
                     </button>
                 </div>
             </article>
+
+            {/* Admin Edit Button */}
+            {isAdmin && (
+                <Link
+                    href={`/admin/blog?edit=${id}`}
+                    className="fixed bottom-8 right-8 bg-slate-900 text-white p-4 rounded-full shadow-2xl hover:bg-[var(--brand-secondary)] transition-all z-50 flex items-center gap-2 font-bold group animate-fade-in-up"
+                >
+                    <div className="bg-white/20 p-1 rounded-full group-hover:bg-white/30 transition-colors">
+                        <Edit size={16} />
+                    </div>
+                    <span>Edit Article</span>
+                </Link>
+            )}
         </div>
     );
 }
