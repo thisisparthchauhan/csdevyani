@@ -170,7 +170,7 @@ export default function Navbar() {
                             return (
                                 <div
                                     key={item.name}
-                                    className="relative group"
+                                    className="group"
                                     onMouseEnter={() => setOpenDropdown(item.name)}
                                     onMouseLeave={() => setOpenDropdown(null)}
                                 >
@@ -180,10 +180,10 @@ export default function Navbar() {
                                     </button>
 
                                     {/* Mega Menu Dropdown */}
-                                    <div className={`absolute top-full -left-20 mt-2 w-[900px] bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transition-all duration-300 ${openDropdown === item.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
-                                        <div className="flex">
+                                    <div className={`absolute top-full left-0 w-full bg-white shadow-xl border-t border-slate-100 overflow-hidden transition-all duration-300 ${openDropdown === item.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+                                        <div className="container mx-auto px-4 flex">
                                             {/* Sidebar */}
-                                            <div className="w-1/4 bg-slate-50 border-r border-slate-100 p-4">
+                                            <div className="w-1/4 bg-slate-50 border-r border-slate-100 p-4 min-h-[400px]">
                                                 {item.subItems?.map((category, idx) => (
                                                     <button
                                                         key={idx}
@@ -197,20 +197,20 @@ export default function Navbar() {
                                             </div>
 
                                             {/* Content Area */}
-                                            <div className="w-3/4 p-6 min-h-[400px]">
+                                            <div className="w-3/4 p-6 min-h-[400px] max-h-[80vh] overflow-y-auto">
                                                 {item.subItems?.map((category, idx) => (
                                                     <div key={idx} className={`${activeCategory === category.category ? 'block' : 'hidden'}`}>
                                                         <h3 className="text-xl font-bold text-[var(--brand-primary)] mb-6 border-b border-slate-100 pb-3">
                                                             {category.category}
                                                         </h3>
-                                                        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+                                                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
                                                             {category.items.map((subItem) => (
                                                                 <Link
                                                                     key={subItem.name}
                                                                     href={subItem.href}
                                                                     className="flex items-start group/item"
                                                                 >
-                                                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 mr-2 group-hover/item:bg-[var(--brand-secondary)] transition-colors"></div>
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 mr-2 group-hover/item:bg-[var(--brand-secondary)] transition-colors shrink-0"></div>
                                                                     <span className="text-sm text-slate-600 group-hover/item:text-[var(--brand-primary)] transition-colors leading-relaxed">
                                                                         {subItem.name}
                                                                     </span>
